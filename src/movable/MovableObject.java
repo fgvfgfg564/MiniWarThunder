@@ -9,7 +9,7 @@ import java.lang.Math;
 abstract public class MovableObject extends JPanel {
 
     protected static Image img;
-    protected double x, y;
+    public double x, y, r;
     protected GameEngine myEngine;
     public boolean isRubbish = false;
 

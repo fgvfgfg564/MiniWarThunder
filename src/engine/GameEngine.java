@@ -23,11 +23,6 @@ public class GameEngine {
     }
 
     public void mainLoop() {
-        while(true){
-            gameMap.paintComponent(g);
-        }
-        //gameMap.paintComponent(g);
-/*
         while (true) {
             for (MovableObject each : (ArrayList<MovableObject>) objects.clone()) {
                 each.loop();
@@ -43,6 +38,6 @@ public class GameEngine {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }*/
+        }
     }
 }

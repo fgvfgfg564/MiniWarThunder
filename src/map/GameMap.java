@@ -1,9 +1,11 @@
 package map;
 
+import Functions.Mathematics;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.Random;
 import java.util.Set;
+import javafx.util.Pair;
 import movable.MovableObject;
 import settings.Settings;
 import java.lang.Math;
@@ -88,9 +90,44 @@ public class GameMap {
         return false;
     }
 
-    public boolean collideWith(MovableObject obj) {
-        // 检查某个物体是否与地图的墙或者边界碰撞
-        return false;
+    Pair<Boolean, Boolean> collideWith(MovableObject obj) {
+        // 判断某个物体是否与地图的边界碰撞
+        // 返回一对boolean，res.getKey() 指代该物体是否撞上竖直墙（此时反转x轴速度）
+        // res.getValue() 指代该物体是否撞上竖水平墙（此时反转y轴速度）
+        // 若物体撞在了迷宫墙的一个角上，则两个都为true. 暂时不考虑碰撞的角度
+        double x = obj.x, y = obj.y, r = obj.r;
+        double blockSize = Settings.defaultBlockSize;
+        int xb = (int) Math.floor(x / blockSize);
+        int yb = (int) Math.floor(y / blockSize);
+
+        boolean colX = false, colY = false;
+
+        if ((xb == w - 1 || !right[xb][yb]) && (xb + 1) * blockSize - x <= r) {
+            colX = true;
+        }
+        if ((yb == h - 1 || !down[xb][yb]) && (yb + 1) * blockSize - y <= r) {
+            colY = true;
+        }
+        if ((xb == 0 || !right[xb - 1][yb]) && x - xb * blockSize <= r) {
+            colX = true;
+        }
+        if ((yb == 0 || !down[xb][yb - 1]) && y - yb * blockSize <= r) {
+            colY = true;
+        }
+
+        if (Mathematics.dist(x, y, xb * blockSize, yb * blockSize) <= r) {
+            colX = colY = true;
+        }
+        if (Mathematics.dist(x, y, (xb + 1) * blockSize, yb * blockSize) <= r) {
+            colX = colY = true;
+        }
+        if (Mathematics.dist(x, y, (xb + 1) * blockSize, (yb + 1) * blockSize) <= r) {
+            colX = colY = true;
+        }
+        if (Mathematics.dist(x, y, xb * blockSize, (yb + 1) * blockSize) <= r) {
+            colX = colY = true;
+        }
+        return new Pair<>(colX, colY);
     }
 
     public void paintComponent(Graphics g) {

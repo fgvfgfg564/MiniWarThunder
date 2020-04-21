@@ -5,9 +5,9 @@ public class Settings {
     public static final int frameHeight = 720;
 
     public static final int minWidth = 5;
-    public static final int maxWidth = 10;
+    public static final int maxWidth = 15;
     public static final int minHeight = 5;
-    public static final int maxHeight = 10;   // 地图大小限制
+    public static final int maxHeight = 15;   // 地图大小限制
     public static final double scaleConstant = 0.8; // 表示地图最大占据屏幕长和宽的多少百分比
 
     public static final int defaultBlockSize = 80;
