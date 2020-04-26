@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import map.GameMap;
+import movable.Bullet;
 import movable.MovableObject;
 import movable.Tank;
 import practical.Pair;
@@ -30,7 +31,6 @@ public class GameEngine {
     // 所有物品的碰撞箱大小及实际显示的大小都要乘上这一个常数
     public Pair<Integer, Integer> startPoint; // 地图左上角的像素坐标
     public GameMap gameMap;    // 地图
-
     public GameEngine(Graphics2D g, MainFrame frame) {
         this.g = g;
         gameMap = new GameMap();
@@ -52,16 +52,13 @@ public class GameEngine {
             }
             tank1.loop();
             tank2.loop();
-
             objects.removeIf(each -> each.isRubbish);
-
             gameMap.paintComponent(g);
             for (MovableObject each : objects) {
                 each.paintComponent(g);
             }
             tank1.paintComponent(g);
             tank2.paintComponent(g);
-
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
