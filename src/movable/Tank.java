@@ -86,22 +86,22 @@ public class Tank extends MovableObject{
         double dy=Speed*cos(theta);
         double oldx=x;
         double oldy=y;
-        if(forward==true){
+        if(forward){
             x-=dx;y-=dy;
         }
-        if(back==true){
+        if(back){
             x+=dx;y+=dy;
         }
         Pair<Boolean,Boolean>test=myEngine.gameMap.collideWith(this);
-        if(test.x==true||test.y==true)
+        if(test.x||test.y)
         {
             x=oldx;y=oldy;
         }
-        if(rRotate==true)
+        if(rRotate)
         {
           theta=(theta-RotateSpeed)%(2*PI);
         }
-        if(lRotate==true)
+        if(lRotate)
         {
             theta=(theta+RotateSpeed)%(2*PI);
         }
