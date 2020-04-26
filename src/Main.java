@@ -1,4 +1,5 @@
 import java.awt.Dimension;
+import java.awt.Graphics2D;
 import javax.swing.JFrame;
 import engine.GameEngine;
 import settings.Settings;
@@ -22,7 +23,7 @@ class MainFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         isDoubleBuffered();
         setVisible(true);
-        GameEngine game = new GameEngine(getGraphics());
+        GameEngine game = new GameEngine((Graphics2D) getGraphics());
         game.mainLoop();
     }
 }

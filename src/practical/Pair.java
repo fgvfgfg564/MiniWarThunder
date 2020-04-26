@@ -2,19 +2,19 @@ package practical;
 
 public class Pair<A, B> {
     // 简单的双值对
-    A _key;
-    B _value;
+    public A x;
+    public B y;
 
     public Pair(A a, B b) {
-        _key = a;
-        _value = b;
+        x = a;
+        y = b;
     }
 
     public A get_key() {
-        return _key;
+        return x;
     }
 
     public B get_value() {
-        return _value;
+        return y;
     }
 }

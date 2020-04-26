@@ -1,7 +1,6 @@
 package map;
 
 import Functions.Mathematics;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.Random;
 import java.util.Set;
@@ -17,7 +16,7 @@ public class GameMap {
     double scaling; // scaling = 1时地图每一格的边长为80像素
     double block_size;
     boolean[][] right, down;
-    Dimension startPoint;   // 地图左上角的坐标
+    public Pair<Integer, Integer> startPoint;   // 地图左上角的坐标
 
     int[] fa;
 
@@ -33,7 +32,7 @@ public class GameMap {
             .round((Settings.frameWidth - w * Settings.defaultBlockSize * scaling) / 2);
         int sth = (int) Math
             .round((Settings.frameHeight - h * Settings.defaultBlockSize * scaling) / 2);
-        startPoint = new Dimension(stw, sth);
+        startPoint = new Pair<Integer, Integer>(stw, sth);
 
         right = new boolean[w - 1][h];
         down = new boolean[w][h - 1];
@@ -131,24 +130,25 @@ public class GameMap {
     }
 
     public void paintComponent(Graphics g) {
+        g.setColor(Settings.defaultMapColor);
         double blockSize = Settings.defaultBlockSize * scaling;
         for (int i = 0; i < w; i++) {
             for (int j = 0; j < h; j++) {
                 if (i == 0) {
-                    drawVertical(g, startPoint.width, startPoint.height + j * blockSize,
+                    drawVertical(g, startPoint.x, startPoint.y + j * blockSize,
                         blockSize);
                 }
                 if (j == 0) {
-                    drawHorizontal(g, startPoint.width + i * blockSize, startPoint.height,
+                    drawHorizontal(g, startPoint.x + i * blockSize, startPoint.y,
                         blockSize);
                 }
                 if (i == w - 1 || !right[i][j]) {
-                    drawVertical(g, startPoint.width + (i + 1) * blockSize,
-                        startPoint.height + j * blockSize, blockSize);
+                    drawVertical(g, startPoint.x + (i + 1) * blockSize,
+                        startPoint.y + j * blockSize, blockSize);
                 }
                 if (j == h - 1 || !down[i][j]) {
-                    drawHorizontal(g, startPoint.width + i * blockSize,
-                        startPoint.height + (j + 1) * blockSize, blockSize);
+                    drawHorizontal(g, startPoint.x + i * blockSize,
+                        startPoint.y + (j + 1) * blockSize, blockSize);
                 }
             }
         }
@@ -172,7 +172,7 @@ public class GameMap {
         return scaling;
     }
 
-    public Dimension getStartPoint() {
-        return startPoint;
+    public Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> getSpawnPoint() {
+        return new Pair<>(startPoint, startPoint);
     }
 }
