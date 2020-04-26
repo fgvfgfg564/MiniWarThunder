@@ -26,8 +26,8 @@ abstract public class MovableObject {
 
     public void paintComponent(Graphics2D g) {
         double scaling = myEngine.scaling;
-        int newX = (int) (x * scaling + myEngine.startPoint.x);
-        int newY = (int) (y * scaling + myEngine.startPoint.y);
+        double newX = x * scaling + myEngine.startPoint.x;
+        double newY = y * scaling + myEngine.startPoint.y;
 
         int width = img.getWidth(null);
         int height = img.getHeight(null);
