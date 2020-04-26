@@ -9,7 +9,7 @@ import java.awt.geom.AffineTransform;
 import javax.swing.JPanel;
 import java.lang.Math;
 
-abstract public class MovableObject extends JPanel {
+abstract public class MovableObject {
 
     public Image img;
     public double x, y, r;
@@ -29,8 +29,8 @@ abstract public class MovableObject extends JPanel {
         int newX = (int) (x * scaling + myEngine.startPoint.x);
         int newY = (int) (y * scaling + myEngine.startPoint.y);
 
-        int width = img.getWidth(this);
-        int height = img.getHeight(this);
+        int width = img.getWidth(null);
+        int height = img.getHeight(null);
 
         double dx = width / 2.0, dy = height / 2.0;
 
@@ -38,7 +38,7 @@ abstract public class MovableObject extends JPanel {
             Math.sin(theta), d = scaling * Math.cos(theta);
 
         g.drawImage(img,
-            new AffineTransform(a, b, c, d, newX - dx * a - dy * c, newY - dx * b - dy * d), this);
+            new AffineTransform(a, b, c, d, newX - dx * a - dy * c, newY - dx * b - dy * d), null);
     }
 
     abstract public void loop();    // 每一帧的迭代
