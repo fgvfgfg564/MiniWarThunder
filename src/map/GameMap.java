@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.Random;
 import java.util.Set;
-import javafx.util.Pair;
+import practical.Pair;
 import movable.MovableObject;
 import settings.Settings;
 import java.lang.Math;
@@ -90,7 +90,7 @@ public class GameMap {
         return false;
     }
 
-    Pair<Boolean, Boolean> collideWith(MovableObject obj) {
+    public Pair<Boolean, Boolean> collideWith(MovableObject obj) {
         // 判断某个物体是否与地图的边界碰撞
         // 返回一对boolean，res.getKey() 指代该物体是否撞上竖直墙（此时反转x轴速度）
         // res.getValue() 指代该物体是否撞上竖水平墙（此时反转y轴速度）
