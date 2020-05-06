@@ -13,9 +13,9 @@ public class Tool extends MovableObject {
     public Tool(GameEngine engine, double x, double y,int rad) {
         super(engine, x, y);
         this.r = Settings.defaultToolRadius;
-        Pair<Integer,Integer> pos=getSpawnPoint();
-        this.x = pos.getKey();
-        this.y =  pos.getValue();
+        Pair<Integer, Integer> pos=getSpawnPoint();
+        this.x = pos.get_key();
+        this.y =  pos.get_value();
         rad=random.nextInt(3);
         switch (this.rad) {
               case 0:
