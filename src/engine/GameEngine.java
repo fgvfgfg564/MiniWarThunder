@@ -5,16 +5,12 @@ import static settings.Settings.frameWidth;
 
 import frame.MainFrame;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.IOException;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
 import map.GameMap;
 import movable.MovableObject;
 import movable.Tank;
@@ -25,7 +21,7 @@ public class GameEngine {
 
     Graphics2D g, out;     // 主窗口
     MainFrame myframe;
-    Image buffer;
+    BufferedImage buffer;
     public Tank tank1, tank2;
     public ArrayList<MovableObject> objects = new ArrayList<>();    //保存所有会动的物体
     public double scaling; // 这个变量代表地图的缩放比率。因为地图大小可变，导致坦克和奖励箱等的大小都必须相应变化。该值由地图大小确定
@@ -34,8 +30,11 @@ public class GameEngine {
     public GameMap gameMap;    // 地图
 
     public GameEngine(Graphics2D g, MainFrame frame) {
-        this.buffer = frame.createImage(frameWidth, frameHeight);
+        this.buffer = new BufferedImage(frameWidth, frameHeight, 1);
         this.g = (Graphics2D) buffer.getGraphics();
+        this.g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        this.g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+            RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         this.out = g;
         gameMap = new GameMap();
         scaling = gameMap.getScale();

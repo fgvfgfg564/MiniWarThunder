@@ -3,11 +3,12 @@ package map;
 import Functions.Mathematics;
 import java.awt.Graphics;
 import java.util.Random;
-import java.util.Set;
 import practical.Pair;
 import movable.MovableObject;
 import settings.Settings;
 import java.lang.Math;
+
+import static settings.Settings.defaultBlockSize;
 
 
 public class GameMap {
@@ -17,11 +18,12 @@ public class GameMap {
     double block_size;
     boolean[][] right, down;
     public Pair<Integer, Integer> startPoint;   // 地图左上角的坐标
+    Random random;
 
     int[] fa;
 
     public GameMap() {
-        Random random = new Random(System.currentTimeMillis());
+        random = new Random(System.currentTimeMillis());
         h = random.nextInt(Settings.maxHeight - Settings.minHeight) + Settings.minHeight;
         w = random.nextInt(Settings.maxWidth - Settings.minWidth) + Settings.minWidth;
         scaling = Math
@@ -172,7 +174,9 @@ public class GameMap {
         return scaling;
     }
 
-    public Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> getSpawnPoint() {
-        return new Pair<>(startPoint, startPoint);
+    public Pair<Integer, Integer> getSpawnPoint() {
+        Integer x = random.nextInt(w) * defaultBlockSize + defaultBlockSize / 2;
+        Integer y = random.nextInt(h) * defaultBlockSize + defaultBlockSize / 2;
+        return new Pair<>(x, y);
     }
 }
