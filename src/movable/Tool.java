@@ -19,13 +19,13 @@ public class Tool extends MovableObject {
         rad=random.nextInt(3);
         switch (this.rad) {
               case 0:
-                  img = Toolkit.getDefaultToolkit().getImage("./images/startool.gif");
+                  img = Toolkit.getDefaultToolkit().getImage("./images/startool.png");
                   break;
               case 1:
-                  img = Toolkit.getDefaultToolkit().getImage("./images/fastertool.gif");
+                  img = Toolkit.getDefaultToolkit().getImage("./images/fastertool.png");
                   break;
               case 2:
-                  img = Toolkit.getDefaultToolkit().getImage("./images/wuditool.gif");
+                  img = Toolkit.getDefaultToolkit().getImage("./images/wuditool.png");
                    break;
         }
     }
