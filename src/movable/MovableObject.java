@@ -36,7 +36,7 @@ abstract public class MovableObject {
 
         double a = scaling * Math.cos(theta), b = scaling * -Math.sin(theta), c = scaling *
             Math.sin(theta), d = scaling * Math.cos(theta);
-
+        
         g.drawImage(img,
             new AffineTransform(a, b, c, d, newX - dx * a - dy * c, newY - dx * b - dy * d), null);
     }
