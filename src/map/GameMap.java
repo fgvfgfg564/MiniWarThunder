@@ -12,6 +12,7 @@ import static settings.Settings.defaultBlockSize;
 
 
 public class GameMap {
+
     int h, w;
     double scaling; // scaling = 1时地图每一格的边长为80像素
     boolean[][] right, down;
@@ -106,6 +107,9 @@ public class GameMap {
         // res.getValue() 指代该物体是否撞上竖水平墙（此时反转y轴速度）
         // 若物体撞在了迷宫墙的一个角上，则两个都为true. 暂时不考虑碰撞的角度
         double x = obj.x, y = obj.y, r = obj.r;
+        if (x < 0 || y < 0 || x > w * defaultBlockSize || y > h * defaultBlockSize) {
+            return new Pair<>(true, true);
+        }
         double blockSize = Settings.defaultBlockSize;
         int xb = (int) Math.floor(x / blockSize);
         int yb = (int) Math.floor(y / blockSize);
