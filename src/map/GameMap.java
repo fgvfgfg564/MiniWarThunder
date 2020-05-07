@@ -69,6 +69,17 @@ public class GameMap {
                 }
             }
         }
+
+        for (int i = 0; i < w; i++) {
+            for (int j = 0; j < h; j++) {
+                if (i < w - 1 && random.nextInt(12) == 0) {
+                    right[i][j] = true;
+                }
+                if (j < h - 1 && random.nextInt(12) == 0) {
+                    down[i][j] = true;
+                }
+            }
+        }
     }
 
     int find(int x) {
@@ -151,6 +162,8 @@ public class GameMap {
                     drawHorizontal(g, startPoint.x + i * blockSize,
                         startPoint.y + (j + 1) * blockSize, blockSize);
                 }
+                drawVertical(g, startPoint.x + i * blockSize,
+                    startPoint.y + j * blockSize, 0);
             }
         }
     }

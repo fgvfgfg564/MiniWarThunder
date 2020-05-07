@@ -39,7 +39,7 @@ abstract public class MovableObject {
             -dx * b - dy * d);
         AffineTransformOp op = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
 
-        g.drawImage(img, op, (int) newX, (int) newY);
+        g.drawImage(img, op, (int) Math.round(newX), (int) Math.round(newY));
     }
 
     abstract public void loop();    // 每一帧的迭代

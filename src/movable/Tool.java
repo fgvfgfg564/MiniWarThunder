@@ -1,5 +1,5 @@
 package movable;
-
+/*
 import engine.GameEngine;
 import practical.Pair;
 import settings.Settings;
@@ -27,7 +27,7 @@ public class Tool extends MovableObject {
               case 2:
                   img = Toolkit.getDefaultToolkit().getImage("./images/wuditool.png");
                    break;
-        }
+        }*/
     }
 
     @Override
@@ -41,12 +41,12 @@ public class Tool extends MovableObject {
                 myEngine.tank1.Speed*=2;//阴间操作，zym说叫我直接改，大力出奇迹
                 break;
             case 2:
-                myEngine.tank1.wudi=1;//阴间操作，zym说叫我直接改，大力出奇迹
+                //myEngine.tank1.wudi=1;//阴间操作，zym说叫我直接改，大力出奇迹
                 break;
         }
             isRubbish = true;
         }
-        if (CollideWith(myEngine.tank2)) {      
+        if (CollideWith(myEngine.tank2)) {
         switch (this.rad) {
             case 0:
                 //虚空操作
@@ -55,7 +55,7 @@ public class Tool extends MovableObject {
                 myEngine.tank1.Speed*=2;//阴间操作，zym说叫我直接改，大力出奇迹
                 break;
             case 2:
-                myEngine.tank1.wudi=1;//阴间操作，zym说叫我直接改，大力出奇迹
+                //myEngine.tank1.wudi=1;//阴间操作，zym说叫我直接改，大力出奇迹
                 break;
         }
             isRubbish = true;
@@ -69,3 +69,4 @@ public class Tool extends MovableObject {
         return false;
     }
 }
+*/

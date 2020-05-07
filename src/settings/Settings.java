@@ -1,6 +1,7 @@
 package settings;
 
 import java.awt.Color;
+import java.awt.Font;
 
 public class Settings {
 
@@ -19,7 +20,16 @@ public class Settings {
     public static final int defaultTankRadius = 20; // 指在scaling=1的前提下，地图和坦克的默认大小
     public static final int defaultBulletRadius = 5;
     public static final int defaultToolRadius = 15;
-    
+
+    public static final int rebound_time=10;
+
     public static final double defaultTankSpeed = 3;
     public static final double defaultTankRotateSpeed = 0.08;
+
+    public static final double waitTime = 4.0;
+
+    public static final int scoreSize = 64;
+    public static final Font scoreFont = new Font("微软雅黑", Font.BOLD, scoreSize);
+    public static double scoreFadeSpeed = 0.5;
+
 }
