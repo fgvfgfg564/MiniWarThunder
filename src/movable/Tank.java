@@ -5,13 +5,18 @@ import static java.lang.StrictMath.cos;
 import static java.lang.StrictMath.sin;
 
 import engine.GameEngine;
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.text.Segment;
 import practical.Pair;
 import settings.Settings;
 
@@ -21,6 +26,8 @@ public class Tank extends MovableObject {
     public double Speed;
     public double RotateSpeed;
     public boolean forward, back, rRotate, lRotate;
+    public int blood;
+    public int wudi;
 
     public Tank(GameEngine engine, double x, double y, int tankType) {
         super(engine, x, y);
@@ -28,7 +35,8 @@ public class Tank extends MovableObject {
         this.Speed = Settings.defaultTankSpeed;
         this.RotateSpeed = Settings.defaultTankRotateSpeed;
         this.forward = this.back = this.rRotate = this.lRotate = false;
-
+        this.blood=Settings.defaultTankBlood;
+        this.wudi=0;
         this.tankType = tankType;
 
         try {
@@ -86,6 +94,9 @@ public class Tank extends MovableObject {
         int key = e.getKeyCode();
         if (tankType == 1) {
             switch (key) {
+                case KeyEvent.VK_F:
+                    this.fire();
+                    break;
                 case KeyEvent.VK_W:
                     this.forward = false;
                     break;
@@ -101,6 +112,9 @@ public class Tank extends MovableObject {
             }
         } else {
             switch (key) {
+                case KeyEvent.VK_M:
+                    this.fire();
+                    break;
                 case KeyEvent.VK_UP:
                     this.forward = false;
                     break;
@@ -116,6 +130,38 @@ public class Tank extends MovableObject {
             }
         }
     }
+
+    public void fire()
+    {
+        double vx=-Speed*sin(theta);
+        double vy=-Speed*cos(theta);
+        myEngine.objects.add(new Bullet(myEngine,x+10*vx,y+10*vy,vx,vy));
+    }
+
+    @Override
+    public void paintComponent(Graphics2D g) {
+        double scaling = myEngine.scaling;
+        double newX = x * scaling + myEngine.startPoint.x;
+        double newY = y * scaling + myEngine.startPoint.y;
+
+        int width = img.getWidth(null);
+        int height = img.getHeight(null);
+
+        double dx = width / 2.0, dy = height / 2.0;
+
+        double a = scaling * Math.cos(theta), b = scaling * -Math.sin(theta), c = scaling *
+            Math.sin(theta), d = scaling * Math.cos(theta);
+
+        AffineTransform transform = new AffineTransform(a, b, c, d, -dx * a - dy * c,
+            -dx * b - dy * d);
+        AffineTransformOp op = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
+
+        g.drawImage(img, op, (int) Math.round(newX), (int) Math.round(newY));
+
+        g.setColor(new Color(255,0,0));
+        g.fillRect((int)(newX-r-1),(int)(newY),(int)(2*r*blood/ Settings.defaultTankBlood),5);
+    }
+
 
     @Override
     public void loop() {

@@ -55,7 +55,7 @@ public class Bullet extends MovableObject {
     public boolean CollideWith(Tank tank) {
         double a = (this.r + tank.r) * (this.r + tank.r);
         if (a <= (this.x - tank.x) * (this.x - tank.x) + (this.y - tank.y) * (this.y - tank.y))
-            return true;
-        return false;
+            return false;
+        return true;
     }
 }
