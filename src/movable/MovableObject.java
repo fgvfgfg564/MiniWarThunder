@@ -1,17 +1,15 @@
 package movable;
 
 import engine.GameEngine;
-import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.geom.AffineTransform;
-import javax.swing.JPanel;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
 import java.lang.Math;
 
 abstract public class MovableObject {
 
-    public Image img;
+    public BufferedImage img;
     public double x, y, r;
     protected GameEngine myEngine;
     public boolean isRubbish = false;
@@ -36,9 +34,12 @@ abstract public class MovableObject {
 
         double a = scaling * Math.cos(theta), b = scaling * -Math.sin(theta), c = scaling *
             Math.sin(theta), d = scaling * Math.cos(theta);
-        
-        g.drawImage(img,
-            new AffineTransform(a, b, c, d, newX - dx * a - dy * c, newY - dx * b - dy * d), null);
+
+        AffineTransform transform = new AffineTransform(a, b, c, d, -dx * a - dy * c,
+            -dx * b - dy * d);
+        AffineTransformOp op = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
+
+        g.drawImage(img, op, (int) newX, (int) newY);
     }
 
     abstract public void loop();    // 每一帧的迭代

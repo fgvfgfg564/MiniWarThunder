@@ -39,8 +39,11 @@ public class GameEngine {
         gameMap = new GameMap();
         scaling = gameMap.getScale();
         startPoint = gameMap.startPoint;
-        tank1 = new Tank(this, 40, 40, 1);
-        tank2 = new Tank(this, 40, 120, 2);
+
+        Pair<Integer, Integer> st1 = gameMap.getSpawnPoint();
+        Pair<Integer, Integer> st2 = gameMap.getSpawnPoint();
+        tank1 = new Tank(this, st1.x, st1.y, 1);
+        tank2 = new Tank(this, st2.x, st2.y, 2);
         myframe = frame;
         myframe.addKeyListener(new KeyMonitor());
     }
@@ -63,6 +66,7 @@ public class GameEngine {
 
             objects.removeIf(each -> each.isRubbish);
 
+            // 渲染
             gameMap.paintComponent(g);
             for (MovableObject each : objects) {
                 each.paintComponent(g);

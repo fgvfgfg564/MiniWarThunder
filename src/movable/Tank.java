@@ -9,6 +9,9 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import practical.Pair;
 import settings.Settings;
 
@@ -27,15 +30,20 @@ public class Tank extends MovableObject {
         this.forward = this.back = this.rRotate = this.lRotate = false;
 
         this.tankType = tankType;
-        switch (this.tankType) {
-            case 1:
-                img = Toolkit.getDefaultToolkit().getImage("./images/tank1.gif");
-                break;
-            case 2:
-                img = Toolkit.getDefaultToolkit().getImage("./images/tank2.gif");
-                break;
-        }
 
+        try {
+            switch (this.tankType) {
+                case 1:
+                    img = ImageIO.read(new File("./images/tank1.gif"));
+                    break;
+                case 2:
+                    img = ImageIO.read(new File("./images/tank2.gif"));
+                    break;
+            }
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     /* 响应键盘事件 */

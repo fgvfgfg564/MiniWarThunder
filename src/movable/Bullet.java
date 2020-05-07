@@ -1,6 +1,9 @@
 package movable;
 
 import engine.GameEngine;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import practical.Pair;
 import settings.Settings;
 
@@ -15,7 +18,11 @@ public class Bullet extends MovableObject {
         this.r = Settings.defaultBulletRadius;
         this.vx = vx;
         this.vy = vy;
-        img = Toolkit.getDefaultToolkit().getImage("./images/bullet.png");
+        try {
+            img = ImageIO.read(new File("./images/bullet.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
