@@ -1,5 +1,5 @@
 package movable;
-
+/*
 import engine.GameEngine;
 import practical.Pair;
 import settings.Settings;
@@ -69,3 +69,4 @@ public class Tool extends MovableObject {
         return false;
     }
 }
+*/
