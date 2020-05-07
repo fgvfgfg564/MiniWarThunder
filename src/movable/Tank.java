@@ -159,7 +159,7 @@ public class Tank extends MovableObject {
         g.drawImage(img, op, (int) Math.round(newX), (int) Math.round(newY));
 
         g.setColor(new Color(255,0,0));
-        g.fillRect((int)(newX-r-1),(int)(newY),(int)(2*r*blood/ Settings.defaultTankBlood),5);
+        g.fillRect((int)(newX-r*scaling),(int)(newY),(int)(2*r*blood*scaling/ Settings.defaultTankBlood),(int)(5*scaling));
     }
 
 

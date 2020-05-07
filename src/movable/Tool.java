@@ -28,45 +28,44 @@ public class Tool extends MovableObject {
                   img = Toolkit.getDefaultToolkit().getImage("./images/wuditool.png");
                    break;
         }*/
-    }
 
-    @Override
-    public void loop() {
-        if (CollideWith(myEngine.tank1)) {
-        switch (this.rad) {
-            case 0:
-                //虚空操作
-                break;
-            case 1:
-                myEngine.tank1.Speed*=2;//阴间操作，zym说叫我直接改，大力出奇迹
-                break;
-            case 2:
-                //myEngine.tank1.wudi=1;//阴间操作，zym说叫我直接改，大力出奇迹
-                break;
-        }
-            isRubbish = true;
-        }
-        if (CollideWith(myEngine.tank2)) {
-        switch (this.rad) {
-            case 0:
-                //虚空操作
-                break;
-            case 1:
-                myEngine.tank1.Speed*=2;//阴间操作，zym说叫我直接改，大力出奇迹
-                break;
-            case 2:
-                //myEngine.tank1.wudi=1;//阴间操作，zym说叫我直接改，大力出奇迹
-                break;
-        }
-            isRubbish = true;
-        }
-    }
-
-    public boolean CollideWith(Tank tank) {
-        double a = (this.r + tank.r) * (this.r + tank.r);
-        if (a <= (this.x - tank.x) * (this.x - tank.x) + (this.y - tank.y) * (this.y - tank.y))
-            return true;
-        return false;
-    }
-}
-*/
+//    @Override
+//    public void loop() {
+//        if (CollideWith(myEngine.tank1)) {
+//        switch (this.rad) {
+//            case 0:
+//                //虚空操作
+//                break;
+//            case 1:
+//                myEngine.tank1.Speed*=2;//阴间操作，zym说叫我直接改，大力出奇迹
+//                break;
+//            case 2:
+//                //myEngine.tank1.wudi=1;//阴间操作，zym说叫我直接改，大力出奇迹
+//                break;
+//        }
+//            isRubbish = true;
+//        }
+//        if (CollideWith(myEngine.tank2)) {
+//        switch (this.rad) {
+//            case 0:
+//                //虚空操作
+//                break;
+//            case 1:
+//                myEngine.tank1.Speed*=2;//阴间操作，zym说叫我直接改，大力出奇迹
+//                break;
+//            case 2:
+//                //myEngine.tank1.wudi=1;//阴间操作，zym说叫我直接改，大力出奇迹
+//                break;
+//        }
+//            isRubbish = true;
+//        }
+//    }
+//
+//    public boolean CollideWith(Tank tank) {
+//        double a = (this.r + tank.r) * (this.r + tank.r);
+//        if (a <= (this.x - tank.x) * (this.x - tank.x) + (this.y - tank.y) * (this.y - tank.y))
+//            return true;
+//        return false;
+//    }
+//}
+//*/
