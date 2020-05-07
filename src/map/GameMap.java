@@ -12,7 +12,6 @@ import static settings.Settings.defaultBlockSize;
 
 
 public class GameMap {
-
     int h, w;
     double scaling; // scaling = 1时地图每一格的边长为80像素
     boolean[][] right, down;
@@ -72,10 +71,10 @@ public class GameMap {
 
         for (int i = 0; i < w; i++) {
             for (int j = 0; j < h; j++) {
-                if (i < w - 1 && random.nextInt(12) == 0) {
+                if (i < w - 1 && random.nextInt(10) == 0) {
                     right[i][j] = true;
                 }
-                if (j < h - 1 && random.nextInt(12) == 0) {
+                if (j < h - 1 && random.nextInt(10) == 0) {
                     down[i][j] = true;
                 }
             }

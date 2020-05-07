@@ -49,10 +49,13 @@ public class GameEngine {
     }
 
     public void mainLoop() {
-        while(true){
-            int res=gameLoop();
-            if(res==1)score1.count();
-            else score2.count();
+        while (true) {
+            int res = gameLoop();
+            if (res == 1) {
+                score1.count();
+            } else if (res == 2) {
+                score2.count();
+            }
         }
     }
 
@@ -89,7 +92,7 @@ public class GameEngine {
                 }
             }
 
-            for (MovableObject each : (ArrayList<MovableObject>) objects.clone()) {
+            for (MovableObject each : new ArrayList<>(objects)) {
                 each.loop();
             }
             tank1.loop();

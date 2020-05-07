@@ -4,6 +4,7 @@ import static java.lang.StrictMath.PI;
 import static java.lang.StrictMath.cos;
 import static java.lang.StrictMath.sin;
 
+import Functions.AudioPlayer;
 import engine.GameEngine;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -21,6 +22,9 @@ import practical.Pair;
 import settings.Settings;
 
 public class Tank extends MovableObject {
+
+    public static AudioPlayer shootSound = new AudioPlayer("sounds/shoot.wav");
+    public static AudioPlayer dieSound = new AudioPlayer("sounds/explode.wav");
 
     public int tankType;
     public double Speed;
@@ -135,9 +139,16 @@ public class Tank extends MovableObject {
 
     public void fire()
     {
+        shootSound.play();
         double vx=-Speed*sin(theta);
         double vy=-Speed*cos(theta);
         myEngine.objects.add(new Bullet(myEngine,x+10*vx,y+10*vy,vx,vy));
+    }
+
+    public void die()
+    {
+        isRubbish = true;
+        dieSound.play();
     }
 
     @Override

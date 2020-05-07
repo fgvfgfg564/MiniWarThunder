@@ -32,7 +32,7 @@ public class Bullet extends MovableObject {
             myEngine.tank1.blood -= 1;
             if(!myEngine.tank1.isRubbish&&myEngine.tank1.blood==0){
                 myEngine.objects.add(new tankbomb(myEngine,myEngine.tank1.x,myEngine.tank1.y));
-                myEngine.tank1.isRubbish=true;
+                myEngine.tank1.die();
             }
             isRubbish = true;
         }
@@ -40,7 +40,7 @@ public class Bullet extends MovableObject {
             myEngine.tank2.blood -= 1;
             if(!myEngine.tank2.isRubbish&&myEngine.tank2.blood==0) {
                 myEngine.objects.add(new tankbomb(myEngine,myEngine.tank2.x, myEngine.tank2.y));
-                myEngine.tank2.isRubbish = true;
+                myEngine.tank2.die();
             }
             isRubbish = true;
         }
