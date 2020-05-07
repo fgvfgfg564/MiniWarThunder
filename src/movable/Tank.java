@@ -28,6 +28,7 @@ public class Tank extends MovableObject {
     public boolean forward, back, rRotate, lRotate;
     public int blood;
     public int wudi;
+    public int fires;
 
     public Tank(GameEngine engine, double x, double y, int tankType) {
         super(engine, x, y);
@@ -37,6 +38,7 @@ public class Tank extends MovableObject {
         this.forward = this.back = this.rRotate = this.lRotate = false;
         this.blood=Settings.defaultTankBlood;
         this.wudi=0;
+        this.fires=0;
         this.tankType = tankType;
 
         try {
@@ -95,7 +97,7 @@ public class Tank extends MovableObject {
         if (tankType == 1) {
             switch (key) {
                 case KeyEvent.VK_F:
-                    this.fire();
+                    this.fires++;
                     break;
                 case KeyEvent.VK_W:
                     this.forward = false;
@@ -113,7 +115,7 @@ public class Tank extends MovableObject {
         } else {
             switch (key) {
                 case KeyEvent.VK_M:
-                    this.fire();
+                    this.fires++;
                     break;
                 case KeyEvent.VK_UP:
                     this.forward = false;
@@ -165,6 +167,11 @@ public class Tank extends MovableObject {
 
     @Override
     public void loop() {
+        for(int i=0;i<fires;i++)
+        {
+            this.fire();
+        }
+        fires=0;
         double dx = Speed * sin(theta);
         double dy = Speed * cos(theta);
         double oldx = x;
