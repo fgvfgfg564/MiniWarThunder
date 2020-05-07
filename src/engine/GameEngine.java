@@ -104,8 +104,8 @@ public class GameEngine {
             for (MovableObject each : objects) {
                 each.paintComponent(g);
             }
-            tank1.paintComponent(g);
-            tank2.paintComponent(g);
+            if(!tank1.isRubbish) tank1.paintComponent(g);
+            if(!tank2.isRubbish) tank2.paintComponent(g);
             score1.paintComponent(g);
 
             out.drawImage(buffer, 0, 0, null);

@@ -30,14 +30,18 @@ public class Bullet extends MovableObject {
     public void loop() {
         if (CollideWith(myEngine.tank1)) {
             myEngine.tank1.blood -= 1;
-            if(myEngine.tank1.blood==0)
+            if(!myEngine.tank1.isRubbish&&myEngine.tank1.blood==0){
+                myEngine.objects.add(new tankbomb(myEngine,myEngine.tank1.x,myEngine.tank1.y));
                 myEngine.tank1.isRubbish=true;
+            }
             isRubbish = true;
         }
         if (CollideWith(myEngine.tank2)) {
             myEngine.tank2.blood -= 1;
-            if(myEngine.tank2.blood==0)
-                myEngine.tank2.isRubbish=true;
+            if(!myEngine.tank2.isRubbish&&myEngine.tank2.blood==0) {
+                myEngine.objects.add(new tankbomb(myEngine,myEngine.tank2.x, myEngine.tank2.y));
+                myEngine.tank2.isRubbish = true;
+            }
             isRubbish = true;
         }
         double ox = x;
