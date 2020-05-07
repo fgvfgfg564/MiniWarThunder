@@ -59,9 +59,6 @@ public class ScoreBoard extends MovableObject {
 
     @Override
     public void loop() {
-        if (Math.random() < 0.01) {
-            count();
-        }
         if (counting > 0) {
             counting--;
         }
