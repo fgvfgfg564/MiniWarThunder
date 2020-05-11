@@ -14,7 +14,7 @@ public class AudioPlayer{
     DataLine.Info dataLineInfo;
     ArrayList<byte[]> audioBytes;
     AudioFormat audioFormat;
-
+	volatile boolean flag=true;
     public AudioPlayer(String filePath) {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(filePath));
@@ -54,7 +54,11 @@ public class AudioPlayer{
             e.printStackTrace();
         }
     }
-
+	
+	public void stop()
+	{
+		flag=false;
+	}
     class PlayerThread extends Thread{
         SourceDataLine sourceDataLine;
         PlayerThread(SourceDataLine sourceDataLine){
@@ -66,12 +70,13 @@ public class AudioPlayer{
             try {
                 sourceDataLine.open(audioFormat);
             } catch (LineUnavailableException e) {
-                e.printStackTrace();
+				e.printStackTrace();
             }
             sourceDataLine.start();
 
             for (byte[] each : audioBytes) {
                 sourceDataLine.write(each, 0, each.length);
+				if(flag==false)break;
             }
 
             sourceDataLine.drain();
