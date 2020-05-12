@@ -25,6 +25,7 @@ public class MainFrame extends JFrame{
 	AudioPlayer Music=new AudioPlayer("sounds/苏维埃进行曲.wav");
 	GameEngine game;
 	volatile boolean flag=false;
+	JButton jb;
 	class MyThread implements Runnable
 	{
 		public void run()
@@ -45,17 +46,21 @@ public class MainFrame extends JFrame{
 		Music.play();
         int w = Settings.frameWidth;
         int h = Settings.frameHeight;
+		jb=new JButton(new ImageIcon("images/start.png"));
         setSize(w, h);
         setPreferredSize(new Dimension(w, h));
         setMaximumSize(new Dimension(w, h));
         setMinimumSize(new Dimension(w, h));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         isDoubleBuffered();
+		this.setLayout(null);
+		this.add(jb);
+		jb.setBounds(w/2-120,550,240,45);
+		jb.setBorderPainted(false);
 		setVisible(true);
-        addMouseListener(new MouseAdapter()
-		{
-			public void mousePressed(MouseEvent e)
-			{
+        jb.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{	 
 				flag=true;
 			}
 		});
@@ -67,6 +72,5 @@ public class MainFrame extends JFrame{
 			int w = Settings.frameWidth;
 			int h = Settings.frameHeight;
 			g.drawImage(new ImageIcon("images/login2.png").getImage(),0,0,w,h,null);
-			g.drawImage(new ImageIcon("images/start2.png").getImage(),w/2-115,550,220,45,null);
 		}
 }
