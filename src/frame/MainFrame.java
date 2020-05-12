@@ -23,6 +23,24 @@ import java.awt.event.MouseEvent;
 import Functions.AudioPlayer;
 public class MainFrame extends JFrame{
 	AudioPlayer Music=new AudioPlayer("sounds/苏维埃进行曲.wav");
+	GameEngine game;
+	volatile boolean flag=false;
+	class MyThread implements Runnable
+	{
+		public void run()
+		{	
+			while(true)
+			{
+				if(flag==true)
+				{
+					Music.stop();
+					game = new GameEngine((Graphics2D) getGraphics(),MainFrame.this);
+					game.mainLoop();
+					break;
+				}
+			}
+		}
+	}
     public MainFrame() {
 		Music.play();
         int w = Settings.frameWidth;
@@ -38,11 +56,11 @@ public class MainFrame extends JFrame{
 		{
 			public void mousePressed(MouseEvent e)
 			{
-				Music.stop();
-				GameEngine game = new GameEngine((Graphics2D) getGraphics(),MainFrame.this);
-				game.mainLoop();
+				flag=true;
 			}
 		});
+		Thread t1=new Thread(new MyThread());
+		t1.start();
     }
 	public void paint(Graphics g){
 			super.paint(g);
