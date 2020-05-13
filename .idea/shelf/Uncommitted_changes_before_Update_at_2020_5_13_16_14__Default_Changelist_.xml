@@ -1,0 +1,14 @@
+<changelist name="Uncommitted_changes_before_Update_at_2020_5_13_16_14_[Default_Changelist]" date="1589357688441" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2020_5_13_16_14_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2020/5/13 16:14 [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/MiniWarThunder/engine/GameEngine$KeyMonitor.class" />
+    <option name="AFTER_PATH" value="out/production/MiniWarThunder/engine/GameEngine$KeyMonitor.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2020_5_13_16_14_[Default_Changelist]/GameEngine$KeyMonitor.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/MiniWarThunder/engine/GameEngine.class" />
+    <option name="AFTER_PATH" value="out/production/MiniWarThunder/engine/GameEngine.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2020_5_13_16_14_[Default_Changelist]/GameEngine.class" />
+  </binary>
+</changelist>

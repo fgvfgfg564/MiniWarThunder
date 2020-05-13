@@ -1,6 +1,8 @@
 package movable;
 
 import java.io.File;
+
+import Functions.AudioPlayer;
 import engine.GameEngine;
 import practical.Pair;
 import settings.Settings;
@@ -17,6 +19,8 @@ import static settings.Settings.defaultBlockSize;
 public class Tool extends MovableObject {
 
     int rad;
+    public static AudioPlayer wudiSound = new AudioPlayer("sounds/wudi1.wav");
+    public static AudioPlayer qhSound = new AudioPlayer("sounds/qh.wav");
     static Random rand = new Random(System.currentTimeMillis());
 
     public Tool(GameEngine engine, double x, double y) {
@@ -48,9 +52,11 @@ public class Tool extends MovableObject {
                     break;
                 case 1:
                     myEngine.tank1.Speed *= 2;
+                    qhSound.play();
                     break;
                 case 2:
                     myEngine.tank1.wudi = 1;
+                    wudiSound.play();
                     break;
             }
             isRubbish = true;
@@ -61,9 +67,11 @@ public class Tool extends MovableObject {
                     break;
                 case 1:
                     myEngine.tank1.Speed *= 2;
+                    qhSound.play();
                     break;
                 case 2:
                     myEngine.tank1.wudi = 1;
+                    wudiSound.play();
                     break;
             }
             isRubbish = true;

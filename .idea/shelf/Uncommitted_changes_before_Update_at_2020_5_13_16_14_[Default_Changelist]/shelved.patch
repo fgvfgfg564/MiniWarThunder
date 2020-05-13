@@ -1,0 +1,51 @@
+Index: src/movable/Tool.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package movable;\r\n\r\nimport java.io.File;\r\nimport engine.GameEngine;\r\nimport practical.Pair;\r\nimport settings.Settings;\r\n\r\nimport java.io.IOException;\r\nimport java.util.Random;\r\nimport java.awt.*;\r\nimport map.GameMap;\r\n\r\nimport javax.imageio.ImageIO;\r\n\r\nimport static settings.Settings.defaultBlockSize;\r\n\r\npublic class Tool extends MovableObject {\r\n\r\n    int rad;\r\n    static Random rand = new Random(System.currentTimeMillis());\r\n\r\n    public Tool(GameEngine engine, double x, double y) {\r\n        super(engine, x, y);\r\n        this.r = Settings.defaultToolRadius;\r\n        rad = rand.nextInt(3);\r\n        try {\r\n            switch (this.rad) {\r\n                case 0:\r\n                    img = ImageIO.read(new File(\"./images/startool.png\"));\r\n                    break;\r\n                case 1:\r\n                    img = ImageIO.read(new File(\"./images/fastertool.png\"));\r\n                    break;\r\n                case 2:\r\n                    img = ImageIO.read(new File(\"./images/wuditool.png\"));\r\n                    break;\r\n            }\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public void loop() {\r\n        if (CollideWith(myEngine.tank1)) {\r\n            switch (this.rad) {\r\n                case 0:\r\n                    break;\r\n                case 1:\r\n                    myEngine.tank1.Speed *= 2;\r\n                    break;\r\n                case 2:\r\n                    myEngine.tank1.wudi = 1;\r\n                    break;\r\n            }\r\n            isRubbish = true;\r\n        }\r\n        if (CollideWith(myEngine.tank2)) {\r\n            switch (this.rad) {\r\n                case 0:\r\n                    break;\r\n                case 1:\r\n                    myEngine.tank1.Speed *= 2;\r\n                    break;\r\n                case 2:\r\n                    myEngine.tank1.wudi = 1;\r\n                    break;\r\n            }\r\n            isRubbish = true;\r\n        }\r\n    }\r\n\r\n    public boolean CollideWith(Tank tank) {\r\n        double a = (this.r + tank.r) * (this.r + tank.r);\r\n        if (a <= (this.x - tank.x) * (this.x - tank.x) + (this.y - tank.y) * (this.y - tank.y)) {\r\n            return false;\r\n        }\r\n        return true;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/movable/Tool.java	(revision ef870c7714524b699574e6b9d1bd1a3e0643f6ea)
++++ src/movable/Tool.java	(date 1589357600656)
+@@ -1,6 +1,8 @@
+ package movable;
+ 
+ import java.io.File;
++
++import Functions.AudioPlayer;
+ import engine.GameEngine;
+ import practical.Pair;
+ import settings.Settings;
+@@ -17,6 +19,8 @@
+ public class Tool extends MovableObject {
+ 
+     int rad;
++    public static AudioPlayer wudiSound = new AudioPlayer("sounds/wudi1.wav");
++    public static AudioPlayer qhSound = new AudioPlayer("sounds/qh.wav");
+     static Random rand = new Random(System.currentTimeMillis());
+ 
+     public Tool(GameEngine engine, double x, double y) {
+@@ -48,9 +52,11 @@
+                     break;
+                 case 1:
+                     myEngine.tank1.Speed *= 2;
++                    qhSound.play();
+                     break;
+                 case 2:
+                     myEngine.tank1.wudi = 1;
++                    wudiSound.play();
+                     break;
+             }
+             isRubbish = true;
+@@ -61,9 +67,11 @@
+                     break;
+                 case 1:
+                     myEngine.tank1.Speed *= 2;
++                    qhSound.play();
+                     break;
+                 case 2:
+                     myEngine.tank1.wudi = 1;
++                    wudiSound.play();
+                     break;
+             }
+             isRubbish = true;
