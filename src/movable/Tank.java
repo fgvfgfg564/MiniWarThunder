@@ -140,9 +140,9 @@ public class Tank extends MovableObject {
     public void fire()
     {
         shootSound.play();
-        double vx=-Speed*sin(theta);
-        double vy=-Speed*cos(theta);
-        myEngine.objects.add(new Bullet(myEngine,x+5*vx,y+5*vy,vx,vy));
+        double vx=-3*sin(theta);
+        double vy=-3*cos(theta);
+        myEngine.objects.add(new Bullet(myEngine,x+8*vx,y+8*vy,vx,vy));
     }
 
     public void die()
