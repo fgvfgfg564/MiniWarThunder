@@ -63,11 +63,12 @@ public class MainFrame extends JFrame {
             public void mouseExited(MouseEvent e) {
             }
         });
+        game = new GameEngine((Graphics2D) getGraphics(), this);
         while (true) {
             paintMe(getGraphics());
             if (flag) {
                 Music.stop();
-                game = new GameEngine((Graphics2D) getGraphics(), this);
+
                 game.mainLoop();
                 flag = false;
                 Music.play();

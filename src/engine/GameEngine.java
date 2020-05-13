@@ -57,6 +57,8 @@ public class GameEngine {
         KeyMonitor controller = new KeyMonitor();
         myFrame.addKeyListener(controller);
         exit = false;
+        score1.setNumber(0);
+        score2.setNumber(0);
         while (!exit) {
             int res = gameLoop();
             if (res == 1) {
