@@ -66,11 +66,11 @@ public class Tool extends MovableObject {
                 case 0:
                     break;
                 case 1:
-                    myEngine.tank1.Speed *= 2;
+                    myEngine.tank2.Speed *= 2;
                     qhSound.play();
                     break;
                 case 2:
-                    myEngine.tank1.wudi = 1;
+                    myEngine.tank2.wudi = 1;
                     wudiSound.play();
                     break;
             }
