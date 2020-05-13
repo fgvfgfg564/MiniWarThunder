@@ -28,6 +28,8 @@ public class Settings {
 
     public static final double waitTime = 4.0;
 
+    public static final double updateAppearTime = 10.0;
+
     public static final int scoreSize = 64;
     public static final Font scoreFont = new Font("微软雅黑", Font.BOLD, scoreSize);
     public static double scoreFadeSpeed = 0.5;

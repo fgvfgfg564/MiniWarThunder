@@ -1,4 +1,5 @@
 package movable;
+
 import java.io.File;
 import engine.GameEngine;
 import practical.Pair;
@@ -16,14 +17,12 @@ import static settings.Settings.defaultBlockSize;
 public class Tool extends MovableObject {
 
     int rad;
-    public Tool(GameEngine engine, double x, double y,int rad) {
+    static Random rand = new Random(System.currentTimeMillis());
+
+    public Tool(GameEngine engine, double x, double y) {
         super(engine, x, y);
         this.r = Settings.defaultToolRadius;
-        Pair<Integer, Integer> pos= engine.gameMap.getSpawnPoint();
-        this.x = pos.get_key();
-        this.y = pos.get_value();
-        Random r = new Random(1);
-        rad=r.nextInt(3);
+        rad = rand.nextInt(3);
         try {
             switch (this.rad) {
                 case 0:
@@ -36,23 +35,22 @@ public class Tool extends MovableObject {
                     img = ImageIO.read(new File("./images/wuditool.png"));
                     break;
             }
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     @Override
     public void loop() {
         if (CollideWith(myEngine.tank1)) {
             switch (this.rad) {
                 case 0:
-                    //虚空操作
                     break;
                 case 1:
-                    myEngine.tank1.Speed*=2;//阴间操作，zym说叫我直接改，大力出奇迹
+                    myEngine.tank1.Speed *= 2;
                     break;
                 case 2:
-                    myEngine.tank1.wudi=1;//阴间操作，zym说叫我直接改，大力出奇迹
+                    myEngine.tank1.wudi = 1;
                     break;
             }
             isRubbish = true;
@@ -60,13 +58,12 @@ public class Tool extends MovableObject {
         if (CollideWith(myEngine.tank2)) {
             switch (this.rad) {
                 case 0:
-                    //虚空操作
                     break;
                 case 1:
-                    myEngine.tank1.Speed*=2;//阴间操作，zym说叫我直接改，大力出奇迹
+                    myEngine.tank1.Speed *= 2;
                     break;
                 case 2:
-                    myEngine.tank1.wudi=1;//阴间操作，zym说叫我直接改，大力出奇迹
+                    myEngine.tank1.wudi = 1;
                     break;
             }
             isRubbish = true;
@@ -75,8 +72,9 @@ public class Tool extends MovableObject {
 
     public boolean CollideWith(Tank tank) {
         double a = (this.r + tank.r) * (this.r + tank.r);
-        if (a <= (this.x - tank.x) * (this.x - tank.x) + (this.y - tank.y) * (this.y - tank.y))
-            return true;
-        return false;
+        if (a <= (this.x - tank.x) * (this.x - tank.x) + (this.y - tank.y) * (this.y - tank.y)) {
+            return false;
+        }
+        return true;
     }
 }

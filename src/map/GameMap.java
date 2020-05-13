@@ -128,6 +128,7 @@ public class GameMap {
         if ((yb == 0 || !down[xb][yb - 1]) && y - yb * blockSize <= r) {
             colY = true;
         }
+        if(colX || colY) return new Pair<>(colX, colY);
 
         if (Mathematics.dist(x, y, xb * blockSize, yb * blockSize) <= r) {
             colX = colY = true;

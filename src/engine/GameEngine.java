@@ -9,14 +9,17 @@ import frame.MainFrame;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.RenderingHints.Key;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Random;
 import map.GameMap;
 import movable.MovableObject;
 import movable.ScoreBoard;
 import movable.Tank;
+import movable.Tool;
 import practical.Pair;
 import settings.Settings;
 
@@ -32,6 +35,8 @@ public class GameEngine {
     // 所有物品的碰撞箱大小及实际显示的大小都要乘上这一个常数
     public Pair<Integer, Integer> startPoint; // 地图左上角的像素坐标
     public GameMap gameMap;    // 地图
+    Random random;
+    boolean exit;
 
     public GameEngine(Graphics2D g, MainFrame frame) {
         this.buffer = new BufferedImage(frameWidth, frameHeight, 1);
@@ -40,16 +45,19 @@ public class GameEngine {
         this.g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
             RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         this.out = g;
+        this.random = new Random(System.currentTimeMillis());
 
         score1 = new ScoreBoard(this, 100, frameHeight - 100);
         score2 = new ScoreBoard(this, frameWidth - 100, frameHeight - 100);
 
         myFrame = frame;
-        myFrame.addKeyListener(new KeyMonitor());
     }
 
     public void mainLoop() {
-        while (true) {
+        KeyMonitor controller = new KeyMonitor();
+        myFrame.addKeyListener(controller);
+        exit = false;
+        while (!exit) {
             int res = gameLoop();
             if (res == 1) {
                 score1.count();
@@ -57,6 +65,7 @@ public class GameEngine {
                 score2.count();
             }
         }
+        myFrame.removeKeyListener(controller);
     }
 
     int gameLoop() {
@@ -76,9 +85,16 @@ public class GameEngine {
 
         int countdown = (int) (waitTime * defaultFPS);
 
-        while (true) {
+        while (!exit) {
             long now = System.nanoTime();
-
+            // 生成升级箱s
+            if (random.nextDouble() <= 1 / (Settings.updateAppearTime * defaultFPS)) {
+                System.out.println(1);
+                Pair<Integer, Integer> pos = gameMap.getSpawnPoint();
+                Tool tool = new Tool(this, pos.x, pos.y);
+                objects.add(tool);
+            }
+            // 物品迭代
             if (tank1.isRubbish || tank2.isRubbish) {
                 countdown--;
                 if (countdown == 0) {
@@ -107,8 +123,12 @@ public class GameEngine {
             for (MovableObject each : objects) {
                 each.paintComponent(g);
             }
-            if(!tank1.isRubbish) tank1.paintComponent(g);
-            if(!tank2.isRubbish) tank2.paintComponent(g);
+            if (!tank1.isRubbish) {
+                tank1.paintComponent(g);
+            }
+            if (!tank2.isRubbish) {
+                tank2.paintComponent(g);
+            }
             score1.paintComponent(g);
 
             out.drawImage(buffer, 0, 0, null);
@@ -127,6 +147,7 @@ public class GameEngine {
                 System.nanoTime();
             }
         }
+        return 0;
     }
 
     /* 事件监听器 */
@@ -135,6 +156,9 @@ public class GameEngine {
         public void keyReleased(KeyEvent e) {
             tank1.keyReleased(e);
             tank2.keyReleased(e);
+            if (e.getKeyCode() == (byte) ('Q')) {
+                exit = true;
+            }
         }
 
         public void keyPressed(KeyEvent e) {

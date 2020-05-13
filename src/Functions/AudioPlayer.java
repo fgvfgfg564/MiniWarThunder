@@ -9,12 +9,13 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 
-public class AudioPlayer{
+public class AudioPlayer {
 
     DataLine.Info dataLineInfo;
     ArrayList<byte[]> audioBytes;
     AudioFormat audioFormat;
-	volatile boolean flag=true;
+    volatile boolean flag = true;
+
     public AudioPlayer(String filePath) {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(filePath));
@@ -46,22 +47,25 @@ public class AudioPlayer{
         }
     }
 
-    public void play(){
+    public void play() {
         try {
-            PlayerThread thread = new PlayerThread((SourceDataLine) AudioSystem.getLine(dataLineInfo));
+            PlayerThread thread = new PlayerThread(
+                (SourceDataLine) AudioSystem.getLine(dataLineInfo));
             thread.start();
         } catch (LineUnavailableException e) {
             e.printStackTrace();
         }
     }
-	
-	public void stop()
-	{
-		flag=false;
-	}
-    class PlayerThread extends Thread{
+
+    public void stop() {
+        flag = false;
+    }
+
+    class PlayerThread extends Thread {
+
         SourceDataLine sourceDataLine;
-        PlayerThread(SourceDataLine sourceDataLine){
+
+        PlayerThread(SourceDataLine sourceDataLine) {
             this.sourceDataLine = sourceDataLine;
         }
 
@@ -70,13 +74,15 @@ public class AudioPlayer{
             try {
                 sourceDataLine.open(audioFormat);
             } catch (LineUnavailableException e) {
-				e.printStackTrace();
+                e.printStackTrace();
             }
             sourceDataLine.start();
 
             for (byte[] each : audioBytes) {
                 sourceDataLine.write(each, 0, each.length);
-				if(flag==false)break;
+                if (!flag) {
+                    break;
+                }
             }
 
             sourceDataLine.drain();
