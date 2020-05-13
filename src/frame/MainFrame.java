@@ -1,28 +1,15 @@
 package frame;
 
-import java.applet.AudioClip;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.awt.Graphics;
-import java.applet.Applet;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.*;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import javax.swing.JFrame;
 import engine.GameEngine;
 import settings.Settings;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import Functions.AudioPlayer;
 
@@ -83,6 +70,7 @@ public class MainFrame extends JFrame {
                 game = new GameEngine((Graphics2D) getGraphics(), this);
                 game.mainLoop();
                 flag = false;
+                Music.play();
             }
         }
     }

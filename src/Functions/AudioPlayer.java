@@ -48,6 +48,7 @@ public class AudioPlayer {
     }
 
     public void play() {
+        flag = true;
         try {
             PlayerThread thread = new PlayerThread(
                 (SourceDataLine) AudioSystem.getLine(dataLineInfo));
