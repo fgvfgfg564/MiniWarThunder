@@ -196,10 +196,8 @@ public class Tank extends MovableObject {
             y += dy;
         }
         Pair<Boolean, Boolean> test = myEngine.gameMap.collideWith(this);
-        if (test.x || test.y) {
-            x = oldx;
-            y = oldy;
-        }
+        if (test.x)x=oldx;
+        if (test.y)y=oldy;
         if (rRotate) {
             theta = (theta - RotateSpeed) % (2 * PI);
         }
