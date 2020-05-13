@@ -17,7 +17,7 @@ public class Settings {
     public static final Color defaultMapColor = Color.black;
 
     public static final int defaultBlockSize = 80;
-    public static final int defaultTankRadius = 20; // 指在scaling=1的前提下，地图和坦克的默认大小
+    public static final int defaultTankRadius = 15; // 指在scaling=1的前提下，地图和坦克的默认大小
     public static final int defaultBulletRadius = 5;
     public static final int defaultToolRadius = 15;
     public static final int defaultTankBlood=5;
