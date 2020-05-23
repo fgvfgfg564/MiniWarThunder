@@ -1,5 +1,6 @@
 package movable;
 
+import Functions.AudioPlayer;
 import engine.GameEngine;
 import java.io.File;
 import java.io.IOException;
@@ -13,6 +14,7 @@ public class Bullet extends MovableObject {
 
     double vx, vy;
     int cnt_rebound;
+    public static AudioPlayer gedangSound = new AudioPlayer("sounds/gedang.wav");
     public Bullet(GameEngine engine, double x, double y, double vx, double vy) {
         super(engine, x, y);
         this.r = Settings.defaultBulletRadius;
@@ -29,7 +31,12 @@ public class Bullet extends MovableObject {
     @Override
     public void loop() {
         if (CollideWith(myEngine.tank1)) {
-            myEngine.tank1.blood -= 1;
+            if(myEngine.tank1.hujia==0) myEngine.tank1.blood -= 1;
+            else
+            {
+                myEngine.tank1.hujia--;
+                gedangSound.play();
+            }
             if(!myEngine.tank1.isRubbish&&myEngine.tank1.blood==0){
                 myEngine.objects.add(new tankbomb(myEngine,myEngine.tank1.x,myEngine.tank1.y));
                 myEngine.tank1.die();
@@ -37,7 +44,12 @@ public class Bullet extends MovableObject {
             isRubbish = true;
         }
         if (CollideWith(myEngine.tank2)) {
-            myEngine.tank2.blood -= 1;
+            if(myEngine.tank2.hujia==0)myEngine.tank2.blood -= 1;
+            else
+            {
+                myEngine.tank2.hujia--;
+                gedangSound.play();
+            }
             if(!myEngine.tank2.isRubbish&&myEngine.tank2.blood==0) {
                 myEngine.objects.add(new tankbomb(myEngine,myEngine.tank2.x, myEngine.tank2.y));
                 myEngine.tank2.die();

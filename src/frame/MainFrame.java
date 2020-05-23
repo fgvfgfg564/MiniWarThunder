@@ -16,6 +16,7 @@ import Functions.AudioPlayer;
 public class MainFrame extends JFrame {
 
     AudioPlayer Music = new AudioPlayer("sounds/苏维埃进行曲.wav");
+    AudioPlayer click = new AudioPlayer("sounds/click.wav");
     GameEngine game;
     volatile boolean flag = false;
     static BufferedImage button, background;
@@ -44,6 +45,7 @@ public class MainFrame extends JFrame {
         this.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                click.play();
                 flag = true;
             }
 
