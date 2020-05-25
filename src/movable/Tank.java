@@ -31,7 +31,7 @@ public class Tank extends MovableObject {
     public double RotateSpeed;
     public boolean forward, back, rRotate, lRotate;
     public int blood;
-    public int wudi;
+    public int hujia;
     public int fires;
 
     public Tank(GameEngine engine, double x, double y, int tankType) {
@@ -41,7 +41,7 @@ public class Tank extends MovableObject {
         this.RotateSpeed = Settings.defaultTankRotateSpeed;
         this.forward = this.back = this.rRotate = this.lRotate = false;
         this.blood=Settings.defaultTankBlood;
-        this.wudi=0;
+        this.hujia=0;
         this.fires=0;
         this.tankType = tankType;
 
