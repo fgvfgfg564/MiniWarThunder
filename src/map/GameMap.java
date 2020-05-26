@@ -13,7 +13,7 @@ import static settings.Settings.defaultBlockSize;
 
 public class GameMap {
 
-    int h, w;
+    public int h, w;
     double scaling; // scaling = 1时地图每一格的边长为80像素
     boolean[][] right, down;
     public Pair<Integer, Integer> startPoint;   // 地图左上角的坐标

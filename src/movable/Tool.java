@@ -19,7 +19,7 @@ import static settings.Settings.defaultBlockSize;
 public class Tool extends MovableObject {
 
     int rad;
-    //public static AudioPlayer wudiSound = new AudioPlayer("sounds/wudi1.wav");
+    public static AudioPlayer wudiSound = new AudioPlayer("sounds/wudi1.wav");
     public static AudioPlayer qhSound = new AudioPlayer("sounds/qh.wav");
     public static AudioPlayer bloodSound= new AudioPlayer("sounds/blood.wav");
     public static AudioPlayer hujiaSound=new AudioPlayer("sounds/hujia.wav");
@@ -28,7 +28,7 @@ public class Tool extends MovableObject {
     public Tool(GameEngine engine, double x, double y) {
         super(engine, x, y);
         this.r = Settings.defaultToolRadius;
-        rad = rand.nextInt(4);
+        rad = rand.nextInt(5);
         try {
             switch (this.rad) {
                 case 0:
@@ -42,6 +42,8 @@ public class Tool extends MovableObject {
                     break;
                 case 3:
                     img = ImageIO.read(new File("./images/bigblood.bmp"));
+                case 4:
+                    img=ImageIO.read(new File("./images/jiguang.png"));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -69,6 +71,9 @@ public class Tool extends MovableObject {
                     myEngine.tank1.blood=Settings.defaultTankBlood;
                     bloodSound.play();
                     break;
+                case 4:
+                    myEngine.tank1.jiguang=1;
+                    wudiSound.play();
             }
             isRubbish = true;
         }
@@ -90,6 +95,9 @@ public class Tool extends MovableObject {
                     myEngine.tank2.blood=Settings.defaultTankBlood;
                     bloodSound.play();
                     break;
+                case 4:
+                    myEngine.tank2.jiguang=1;
+                    wudiSound.play();
             }
             isRubbish = true;
         }
