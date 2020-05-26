@@ -8,7 +8,8 @@ public class Settings {
     public static final int frameWidth = 1280;
     public static final int frameHeight = 720;
     public static final double defaultFPS = 60;
-    
+
+
     public static final int minWidth = 5;
     public static final int maxWidth = 12;
     public static final int minHeight = 5;
