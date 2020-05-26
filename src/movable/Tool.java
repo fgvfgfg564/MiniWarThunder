@@ -29,6 +29,7 @@ public class Tool extends MovableObject {
         super(engine, x, y);
         this.r = Settings.defaultToolRadius;
         rad = rand.nextInt(5);
+        rad = 4;
         try {
             switch (this.rad) {
                 case 0:

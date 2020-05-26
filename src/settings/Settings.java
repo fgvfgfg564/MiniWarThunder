@@ -22,7 +22,7 @@ public class Settings {
     public static final int defaultBulletRadius = 5;
     public static final int defaultToolRadius = 15;
     public static final int defaultTankBlood=5;
-    public static final int rebound_time=10;
+    public static final int rebound_time=40;
 
     public static final double defaultTankSpeed = 3;
     public static final double defaultTankRotateSpeed = 0.08;
