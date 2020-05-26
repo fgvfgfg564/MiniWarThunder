@@ -178,9 +178,11 @@ public class Tank extends MovableObject {
 
     @Override
     public void loop() {
+        if(!this.isRubbish){
         for(int i=0;i<fires;i++)
         {
             this.fire();
+        }
         }
         fires=0;
         double dx = Speed * sin(theta);
