@@ -33,6 +33,7 @@ public class Tank extends MovableObject {
     public int blood;
     public int hujia;
     public int fires;
+    public int bulletnumber;
 
     public Tank(GameEngine engine, double x, double y, int tankType) {
         super(engine, x, y);
@@ -43,6 +44,7 @@ public class Tank extends MovableObject {
         this.blood=Settings.defaultTankBlood;
         this.hujia=0;
         this.fires=0;
+        this.bulletnumber=0;
         this.tankType = tankType;
 
         try {
@@ -140,9 +142,11 @@ public class Tank extends MovableObject {
     public void fire()
     {
         shootSound.play();
+        this.bulletnumber++;
         double vx=-3*sin(theta);
         double vy=-3*cos(theta);
-        myEngine.objects.add(new Bullet(myEngine,x+8*vx,y+8*vy,vx,vy));
+        if(this.bulletnumber<=5)myEngine.objects.add(new Bullet(myEngine,x+8*vx,y+8*vy,vx,vy,this));
+        else this.bulletnumber--;
     }
 
     public void die()

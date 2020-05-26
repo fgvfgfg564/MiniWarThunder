@@ -14,13 +14,15 @@ public class Bullet extends MovableObject {
 
     double vx, vy;
     int cnt_rebound;
+    Tank wh;
     public static AudioPlayer gedangSound = new AudioPlayer("sounds/gedang.wav");
-    public Bullet(GameEngine engine, double x, double y, double vx, double vy) {
+    public Bullet(GameEngine engine, double x, double y, double vx, double vy,Tank who) {
         super(engine, x, y);
         this.r = Settings.defaultBulletRadius;
         this.vx = vx;
         this.vy = vy;
         this.cnt_rebound=0;
+        this.wh=who;
         try {
             img = ImageIO.read(new File("./images/bullet.png"));
         } catch (IOException e) {
@@ -42,6 +44,7 @@ public class Bullet extends MovableObject {
                 myEngine.tank1.die();
             }
             isRubbish = true;
+            wh.bulletnumber--;
         }
         if (CollideWith(myEngine.tank2)) {
             if(myEngine.tank2.hujia==0)myEngine.tank2.blood -= 1;
@@ -55,6 +58,7 @@ public class Bullet extends MovableObject {
                 myEngine.tank2.die();
             }
             isRubbish = true;
+            wh.bulletnumber--;
         }
         double ox = x;
         double oy = y;
@@ -73,8 +77,10 @@ public class Bullet extends MovableObject {
             vy = -vy;
             this.cnt_rebound++;
         }
-        if(this.cnt_rebound>=Settings.rebound_time)
-            this.isRubbish=true;
+        if(this.cnt_rebound>=Settings.rebound_time){
+            this.isRubbish=true;wh.bulletnumber--;
+            System.out.println(wh.bulletnumber+"sssss");
+        }
     }
 
     public boolean CollideWith(Tank tank) {
