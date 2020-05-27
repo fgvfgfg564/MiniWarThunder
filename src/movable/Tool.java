@@ -18,7 +18,7 @@ import static settings.Settings.defaultBlockSize;
 
 public class Tool extends MovableObject {
 
-    int rad;
+    int rad,rad2;
     public static AudioPlayer wudiSound = new AudioPlayer("sounds/wudi1.wav");
     public static AudioPlayer qhSound = new AudioPlayer("sounds/qh.wav");
     public static AudioPlayer bloodSound= new AudioPlayer("sounds/blood.wav");
@@ -28,11 +28,13 @@ public class Tool extends MovableObject {
     public Tool(GameEngine engine, double x, double y) {
         super(engine, x, y);
         this.r = Settings.defaultToolRadius;
-        this.rad = rand.nextInt(5);
+        this.rad = rand.nextInt(4);
+        this.rad2=rand.nextInt(4)+1;
         try {
             switch (this.rad) {
                 case 0:
-                    img = ImageIO.read(new File("./images/smallblood.bmp"));
+                    if(rad2<=3)img = ImageIO.read(new File("./images/smallblood.bmp"));
+                    else img = ImageIO.read(new File("./images/bigblood.bmp"));
                     break;
                 case 1:
                     img = ImageIO.read(new File("./images/fastertool.jpg"));
@@ -41,8 +43,6 @@ public class Tool extends MovableObject {
                     img = ImageIO.read(new File("./images/hujia.jpg"));
                     break;
                 case 3:
-                    img = ImageIO.read(new File("./images/bigblood.bmp"));
-                case 4:
                     img=ImageIO.read(new File("./images/jiguang.jpg"));
             }
         } catch (IOException e) {
@@ -55,12 +55,13 @@ public class Tool extends MovableObject {
         if (CollideWith(myEngine.tank1)) {
             switch (this.rad) {
                 case 0:
+                    if(rad2>=4){myEngine.tank1.blood=Settings.defaultTankBlood;bloodSound.play();break;}
                     if(myEngine.tank1.blood<Settings.defaultTankBlood) myEngine.tank1.blood++;
                     bloodSound.play();
                     break;
 
                 case 1:
-                    if(myEngine.tank1.Speed <10)myEngine.tank1.Speed+=2;
+                    if(myEngine.tank1.Speed==3)myEngine.tank1.Speed+=2;
                     qhSound.play();
                     break;
                 case 2:
@@ -68,11 +69,7 @@ public class Tool extends MovableObject {
                     hujiaSound.play();
                     break;
                 case 3:
-                    myEngine.tank1.blood=Settings.defaultTankBlood;
-                    bloodSound.play();
-                    break;
-                case 4:
-                    myEngine.tank1.jiguang=1;
+                    myEngine.tank1.jiguang=rad2;
                     wudiSound.play();
             }
             isRubbish = true;
@@ -80,11 +77,12 @@ public class Tool extends MovableObject {
         if (CollideWith(myEngine.tank2)) {
             switch (this.rad) {
                 case 0:
+                    if(rad2>=4){myEngine.tank2.blood=Settings.defaultTankBlood;bloodSound.play();break;}
                     if(myEngine.tank2.blood<Settings.defaultTankBlood) myEngine.tank2.blood++;
                     bloodSound.play();
                     break;
                 case 1:
-                    if(myEngine.tank2.Speed <10) myEngine.tank2.Speed += 2;
+                    if(myEngine.tank2.Speed==3) myEngine.tank2.Speed += 2;
                     qhSound.play();
                     break;
                 case 2:
@@ -92,11 +90,7 @@ public class Tool extends MovableObject {
                     hujiaSound.play();
                     break;
                 case 3:
-                    myEngine.tank2.blood=Settings.defaultTankBlood;
-                    bloodSound.play();
-                    break;
-                case 4:
-                    myEngine.tank2.jiguang=1;
+                    myEngine.tank2.jiguang=rad2;
                     wudiSound.play();
             }
             isRubbish = true;

@@ -11,6 +11,7 @@ import practical.Pair;
 import settings.Settings;
 
 import java.awt.*;
+import java.nio.Buffer;
 
 import static settings.Settings.defaultBlockSize;
 
@@ -190,5 +191,53 @@ class Bigbullet extends Bullet {
         AffineTransformOp op = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
 
         g.drawImage(img, op, (int) Math.round(newX), (int) Math.round(newY));
+    }
+}
+class Bomb extends Bullet {
+
+    public static AudioPlayer jiguangsound = new AudioPlayer("sounds/dl.wav");
+
+    public Bomb(GameEngine engine, double x, double y, double vx, double vy, int type) {
+        super(engine, x, y, vx, vy, type);
+        this.tp = 0;
+        this.r = Settings.defaultBulletRadius*3;
+        this.cnt_rebound =0;
+        try {
+            img = ImageIO.read(new File("./images/dilei.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void loop() {
+        if (CollideWith(myEngine.tank1)) {
+            myEngine.tank1.blood = 0;
+            if (!myEngine.tank1.isRubbish && myEngine.tank1.blood == 0) {
+                myEngine.objects.add(new tankbomb(myEngine, myEngine.tank1.x, myEngine.tank1.y));
+                myEngine.tank1.die();
+            }
+        }
+        if (CollideWith(myEngine.tank2)) {
+            myEngine.tank2.blood = 0;
+            if (!myEngine.tank2.isRubbish && myEngine.tank2.blood == 0) {
+                myEngine.objects.add(new tankbomb(myEngine, myEngine.tank2.x, myEngine.tank2.y));
+                myEngine.tank2.die();
+            }
+        }
+        double ox = x;
+        double oy = y;
+        this.cnt_rebound++;
+        if (this.cnt_rebound >= Settings.rebound_time*20) {
+            this.isRubbish = true;
+        }
+    }
+    public boolean CollideWith(Tank tank) {
+        if(cnt_rebound<=20)return false;
+        double a = (this.r + tank.r) * (this.r + tank.r);
+        if (a <= (this.x - tank.x) * (this.x - tank.x) + (this.y - tank.y) * (this.y - tank.y)) {
+            return false;
+        }
+        return true;
     }
 }
