@@ -15,7 +15,7 @@ public class GameMap {
 
     public int h, w;
     double scaling; // scaling = 1时地图每一格的边长为80像素
-    boolean[][] right, down;
+    boolean[][] right, down, ignore;
     public Pair<Integer, Integer> startPoint;   // 地图左上角的坐标
     Random random;
 
@@ -37,6 +37,7 @@ public class GameMap {
 
         right = new boolean[w - 1][h];
         down = new boolean[w][h - 1];
+        ignore = new boolean[w + 1][h + 1];
 
         int n = w * h;
         fa = new int[n];
@@ -77,6 +78,15 @@ public class GameMap {
                 }
                 if (j < h - 1 && random.nextInt(10) == 0) {
                     down[i][j] = true;
+                }
+            }
+        }
+
+        for (int i = 1; i < w; i++) {
+            for (int j = 1; j < h; j++) {
+                if (right[i - 1][j - 1] && right[i - 1][j] && down[i - 1][j - 1] && down[i][j
+                    - 1]) {
+                    ignore[i][j] = true;
                 }
             }
         }
@@ -128,18 +138,23 @@ public class GameMap {
         if ((yb == 0 || !down[xb][yb - 1]) && y - yb * blockSize <= r) {
             colY = true;
         }
-        if(colX || colY) return new Pair<>(colX, colY);
+        if (colX || colY) {
+            return new Pair<>(colX, colY);
+        }
 
-        if (Mathematics.dist(x, y, xb * blockSize, yb * blockSize) <= r) {
+        if (!ignore[xb][yb] && Mathematics.dist(x, y, xb * blockSize, yb * blockSize) <= r) {
             colX = colY = true;
         }
-        if (Mathematics.dist(x, y, (xb + 1) * blockSize, yb * blockSize) <= r) {
+        if (!ignore[xb + 1][yb]
+            && Mathematics.dist(x, y, (xb + 1) * blockSize, yb * blockSize) <= r) {
             colX = colY = true;
         }
-        if (Mathematics.dist(x, y, (xb + 1) * blockSize, (yb + 1) * blockSize) <= r) {
+        if (!ignore[xb + 1][yb + 1]
+            && Mathematics.dist(x, y, (xb + 1) * blockSize, (yb + 1) * blockSize) <= r) {
             colX = colY = true;
         }
-        if (Mathematics.dist(x, y, xb * blockSize, (yb + 1) * blockSize) <= r) {
+        if (!ignore[xb][yb + 1]
+            && Mathematics.dist(x, y, xb * blockSize, (yb + 1) * blockSize) <= r) {
             colX = colY = true;
         }
         return new Pair<>(colX, colY);
