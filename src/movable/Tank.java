@@ -14,6 +14,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -25,7 +26,6 @@ public class Tank extends MovableObject {
 
     public static AudioPlayer shootSound = new AudioPlayer("sounds/shoot.wav");
     public static AudioPlayer dieSound = new AudioPlayer("sounds/explode.wav");
-
     public int tankType;
     public double Speed;
     public double RotateSpeed;
@@ -179,7 +179,6 @@ public class Tank extends MovableObject {
         AffineTransformOp op = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
 
         g.drawImage(img, op, (int) Math.round(newX), (int) Math.round(newY));
-
         g.setColor(new Color(255,0,0));
         g.fillRect((int)(newX-r*scaling),(int)(newY),(int)(2*r*blood*scaling/ Settings.defaultTankBlood),(int)(5*scaling));
     }

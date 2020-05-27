@@ -43,7 +43,7 @@ public class Tool extends MovableObject {
                 case 3:
                     img = ImageIO.read(new File("./images/bigblood.bmp"));
                 case 4:
-                    img=ImageIO.read(new File("./images/jiguang.png"));
+                    img=ImageIO.read(new File("./images/jiguang.jpg"));
             }
         } catch (IOException e) {
             e.printStackTrace();
