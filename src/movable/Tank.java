@@ -150,7 +150,7 @@ public class Tank extends MovableObject {
         if(this.jiguang>0){
             int t=this.jiguang;
             this.jiguang=0;
-            System.out.println("what the fuck"+t);
+           // System.out.println("what the fuck"+t);
             if(t==1)myEngine.objects.add(new Bigbullet(myEngine,x,y,vx,vy,tankType,theta));
             if(t==2||t==3){
                 double sum=sqrt(vx*vx+vy*vy),ta=vy/vx;
@@ -160,13 +160,13 @@ public class Tank extends MovableObject {
                 if(d1>90.0){d1-=180;re1=1;}
                 if(d2<-90.0){d2+=180;re2=1;}
                 double ta1=Math.tan(Math.toRadians(d1)),ta2=Math.tan(Math.toRadians(d2));
-                System.out.println(degree+","+d1+","+d2+"|||"+ta1+","+ta2);
+              //  System.out.println(degree+","+d1+","+d2+"|||"+ta1+","+ta2);
                 double vx1=sum/sqrt(1+ta1*ta1),vy1=sum*ta1/sqrt(1+ta1*ta1);
                 double vx2=sum/sqrt(1+ta2*ta2),vy2=sum*ta2/sqrt(1+ta2*ta2);
                 if(vx<0){vx1=-vx1;vy1=-vy1;vx2=-vx2;vy2=-vy2;}
                 if(re1>0){vx1=-vx1;vy1=-vy1;}
                 if(re2>0){vx2=-vx2;vy2=-vy2;}
-                System.out.println(vx+"|"+vy+","+vx1+"|"+vy1+","+vx2+"|"+vy2);
+               // System.out.println(vx+"|"+vy+","+vx1+"|"+vy1+","+vx2+"|"+vy2);
                 myEngine.objects.add(new Bullet(myEngine,x+8*vx,y+8*vy,vx,vy,0));
                 myEngine.objects.add(new Bullet(myEngine,x+8*vx,y+8*vy,vx1,vy1,0));
                 myEngine.objects.add(new Bullet(myEngine,x+8*vx,y+8*vy,vx2,vy2,0));
