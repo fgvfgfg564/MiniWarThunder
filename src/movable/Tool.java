@@ -28,8 +28,7 @@ public class Tool extends MovableObject {
     public Tool(GameEngine engine, double x, double y) {
         super(engine, x, y);
         this.r = Settings.defaultToolRadius;
-        rad = rand.nextInt(5);
-        rad = 4;
+        this.rad = rand.nextInt(5);
         try {
             switch (this.rad) {
                 case 0:

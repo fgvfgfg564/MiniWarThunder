@@ -9,6 +9,8 @@ import settings.Settings;
 import java.lang.Math;
 
 import static settings.Settings.defaultBlockSize;
+import static settings.Settings.defaultVertexRadius;
+import static settings.Settings.removeWallRate;
 
 
 public class GameMap {
@@ -73,10 +75,10 @@ public class GameMap {
 
         for (int i = 0; i < w; i++) {
             for (int j = 0; j < h; j++) {
-                if (i < w - 1 && random.nextInt(10) == 0) {
+                if (i < w - 1 && random.nextDouble() <= removeWallRate) {
                     right[i][j] = true;
                 }
-                if (j < h - 1 && random.nextInt(10) == 0) {
+                if (j < h - 1 && random.nextDouble() <= removeWallRate) {
                     down[i][j] = true;
                 }
             }
@@ -138,23 +140,24 @@ public class GameMap {
         if ((yb == 0 || !down[xb][yb - 1]) && y - yb * blockSize <= r) {
             colY = true;
         }
-        if (colX || colY) {
-            return new Pair<>(colX, colY);
-        }
 
-        if (!ignore[xb][yb] && Mathematics.dist(x, y, xb * blockSize, yb * blockSize) <= r) {
+        if (!ignore[xb][yb]
+            && Mathematics.dist(x, y, xb * blockSize, yb * blockSize) <= r + defaultVertexRadius) {
             colX = colY = true;
         }
         if (!ignore[xb + 1][yb]
-            && Mathematics.dist(x, y, (xb + 1) * blockSize, yb * blockSize) <= r) {
+            && Mathematics.dist(x, y, (xb + 1) * blockSize, yb * blockSize)
+            <= r + defaultVertexRadius) {
             colX = colY = true;
         }
         if (!ignore[xb + 1][yb + 1]
-            && Mathematics.dist(x, y, (xb + 1) * blockSize, (yb + 1) * blockSize) <= r) {
+            && Mathematics.dist(x, y, (xb + 1) * blockSize, (yb + 1) * blockSize)
+            <= r + defaultVertexRadius) {
             colX = colY = true;
         }
         if (!ignore[xb][yb + 1]
-            && Mathematics.dist(x, y, xb * blockSize, (yb + 1) * blockSize) <= r) {
+            && Mathematics.dist(x, y, xb * blockSize, (yb + 1) * blockSize)
+            <= r + defaultVertexRadius) {
             colX = colY = true;
         }
         return new Pair<>(colX, colY);
@@ -181,10 +184,23 @@ public class GameMap {
                     drawHorizontal(g, startPoint.x + i * blockSize,
                         startPoint.y + (j + 1) * blockSize, blockSize);
                 }
-                drawVertical(g, startPoint.x + i * blockSize,
-                    startPoint.y + j * blockSize, 0);
             }
         }
+        double vertexSize = defaultVertexRadius * 2 * scaling;
+        for (int i = 0; i <= w; i++) {
+            for (int j = 0; j <= h; j++) {
+                if (!ignore[i][j]) {
+                    g.fillOval(newRound(startPoint.x + i * blockSize - vertexSize / 2.0),
+                        newRound(startPoint.y + j * blockSize - vertexSize / 2.0),
+                        newRound(vertexSize),
+                        newRound(vertexSize));
+                }
+            }
+        }
+    }
+
+    static int newRound(double x) {
+        return (int) (Math.round(x));
     }
 
     void drawVertical(Graphics g, double x, double y, double len) {

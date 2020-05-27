@@ -138,7 +138,6 @@ class Bigbullet extends Bullet {
                 myEngine.objects.add(new tankbomb(myEngine, myEngine.tank1.x, myEngine.tank1.y));
                 myEngine.tank1.die();
             }
-            isRubbish = true;
         }
         if (CollideWith(myEngine.tank2)) {
             myEngine.tank2.blood = 0;
@@ -146,7 +145,6 @@ class Bigbullet extends Bullet {
                 myEngine.objects.add(new tankbomb(myEngine, myEngine.tank2.x, myEngine.tank2.y));
                 myEngine.tank2.die();
             }
-            isRubbish = true;
         }
         double ox = x;
         double oy = y;
