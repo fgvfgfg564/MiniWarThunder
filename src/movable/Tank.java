@@ -171,7 +171,7 @@ public class Tank extends MovableObject {
                 myEngine.objects.add(new Bullet(myEngine,x+8*vx,y+8*vy,vx1,vy1,0));
                 myEngine.objects.add(new Bullet(myEngine,x+8*vx,y+8*vy,vx2,vy2,0));
             }
-            if(t==4)myEngine.objects.add(new Bomb(myEngine,x,y,0,0,0));
+            if(t==4)myEngine.objects.add(new Bomb(myEngine,x,y,0,0,tankType));
             return;
         }
         this.bulletnumber++;

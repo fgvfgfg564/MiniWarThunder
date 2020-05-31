@@ -199,7 +199,7 @@ class Bomb extends Bullet {
 
     public Bomb(GameEngine engine, double x, double y, double vx, double vy, int type) {
         super(engine, x, y, vx, vy, type);
-        this.tp = 0;
+        this.tp = type+2;
         this.r = Settings.defaultBulletRadius*3;
         this.cnt_rebound =0;
         try {
@@ -233,6 +233,7 @@ class Bomb extends Bullet {
         }
     }
     public boolean CollideWith(Tank tank) {
+        if (tank.tankType == (this.tp - 2)) return false;
         if(cnt_rebound<=20)return false;
         double a = (this.r + tank.r) * (this.r + tank.r);
         if (a <= (this.x - tank.x) * (this.x - tank.x) + (this.y - tank.y) * (this.y - tank.y)) {

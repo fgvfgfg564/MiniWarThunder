@@ -19,12 +19,13 @@ public class MainFrame extends JFrame {
     AudioPlayer click = new AudioPlayer("sounds/click.wav");
     GameEngine game;
     volatile boolean flag = false;
-    static BufferedImage button, background;
+    static BufferedImage button, background,helpinfo;
 
     static {
         try {
             button = ImageIO.read(new File("images/start.png"));
             background = ImageIO.read(new File("images/login2.png"));
+            helpinfo=ImageIO.read(new File("images/help.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -83,5 +84,6 @@ public class MainFrame extends JFrame {
         int h = Settings.frameHeight;
         g.drawImage(background, 0, 0, w, h, null);
         g.drawImage(button, w / 2 - 120, 550, 240, 45, null);
+    //    g.drawImage(helpinfo, w / 2+550, 620, 60, 60, null);
     }
 }
