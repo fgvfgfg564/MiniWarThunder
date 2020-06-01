@@ -43,7 +43,9 @@ public class Tool extends MovableObject {
                     img = ImageIO.read(new File("./images/hujia.jpg"));
                     break;
                 case 3:
-                    img=ImageIO.read(new File("./images/jiguang.jpg"));
+                    if(rad2==1) img=ImageIO.read(new File("./images/jiguang.jpg"));
+                    else if(rad2==4)img=ImageIO.read(new File("./images/zhadan.jpg"));
+                    else img=ImageIO.read(new File("./images/sandan.jpg"));
             }
         } catch (IOException e) {
             e.printStackTrace();

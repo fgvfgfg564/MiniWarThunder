@@ -168,6 +168,8 @@ public class Tank extends MovableObject {
                 if(re2>0){vx2=-vx2;vy2=-vy2;}
                // System.out.println(vx+"|"+vy+","+vx1+"|"+vy1+","+vx2+"|"+vy2);
                 myEngine.objects.add(new Bullet(myEngine,x+8*vx,y+8*vy,vx,vy,0));
+                myEngine.objects.add(new Bullet(myEngine,x+9*vx,y+9*vy,vx,vy,0));
+                myEngine.objects.add(new Bullet(myEngine,x+10*vx,y+10*vy,vx,vy,0));
                 myEngine.objects.add(new Bullet(myEngine,x+8*vx,y+8*vy,vx1,vy1,0));
                 myEngine.objects.add(new Bullet(myEngine,x+8*vx,y+8*vy,vx2,vy2,0));
             }
